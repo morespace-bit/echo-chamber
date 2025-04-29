@@ -27,7 +27,7 @@ export default function Signup() {
         displayName: info.displayName,
         photo: info.photoURL,
       }));
-      navigate("/feed");
+      navigate("/welcome");
     } catch (err) {
       console.log(err);
     }

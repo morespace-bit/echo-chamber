@@ -20,15 +20,15 @@ export default function Feed() {
   return (
     <>
       {/* main container */}
-      <div className="flex w-full md:justify-between items-center justify-center min-h-screen bg-gray-200 overflow-x-hidden overflow-y-hidden">
+      <div className="flex w-full md:justify-between items-center justify-center flex-9/12 bg-gray-200 overflow-x-hidden overflow-y-auto">
         {/* left part */}
-        <div className="hidden md:block absolute">
+        <div className="hidden md:block  fixed left-0 top-30 h-full">
           <h1>Lefts</h1>
         </div>
 
         {/* center part */}
         {/* card container */}
-        <div className="w-full text-center p-6 flex justify-center items-center flex-col">
+        <div className="w-full text-center p-6 flex justify-center items-center flex-col overflow-y-auto mx-h-[100%] ">
           {img.map((i) => {
             return (
               <div
@@ -64,7 +64,7 @@ export default function Feed() {
         </div>
 
         {/* right part */}
-        <div className="hidden md:block">
+        <div className=" r-0 t-20 fixed">
           <h1>Right</h1>
         </div>
       </div>

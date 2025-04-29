@@ -45,17 +45,28 @@ export default function Login() {
                 type="text"
                 placeholder="Enter your Email"
                 className="px-4 py-5 border border-gray-500 rounded-xs w-full"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
               />
               <input
                 type="password"
                 placeholder="Enter your Password"
                 className="px-4 py-5 border border-gray-500 rounded-xs w-full"
+                onChange={(e) => {
+                  e.target.value;
+                }}
               />
             </div>
             {/* Forget password and Next */}
             <div className="flex flex-col space-y-5 md:flex-row md:space-y-0 justify-center items-center px-6 md:justify-between">
               <p className="text-blue-800 md:justify-end">Forget Password</p>
-              <button className="px-4 py-5 w-full md:w-50 border border-gray-500 rounded-xs  bg-sky-700 text-white  hover:shadow-2xl shadow-blue-800/50">
+              <button
+                onClick={() => {
+                  login(email, password);
+                }}
+                className="px-4 py-5 w-full md:w-50 border border-gray-500 rounded-xs  bg-sky-700 text-white  hover:shadow-2xl shadow-blue-800/50"
+              >
                 Next
               </button>
             </div>
