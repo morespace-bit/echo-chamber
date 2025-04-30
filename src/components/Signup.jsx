@@ -115,7 +115,9 @@ export default function Signup() {
               </button>
             </div>
             <div className="flex justify-center items-center">
-              <Link to="/login">already signed in</Link>
+              <button className="bg-blue-300 rounded-2xl p-4 hover:bg-blue-800 duration-75 ease-in">
+                <Link to="/login">already signed in</Link>
+              </button>
             </div>
           </div>
           <div className=" hidden md:block ">

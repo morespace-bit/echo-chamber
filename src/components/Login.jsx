@@ -96,9 +96,11 @@ export default function Login() {
             </div>
             {/* if not signed in yet */}
             <div className="flex justify-center items-center">
-              <Link to="/signup" replace={true}>
-                not signed in yet
-              </Link>
+              <button className="bg-blue-300 rounded-2xl p-4 hover:bg-blue-800 duration-75 ease-in">
+                <Link to="/signup" replace={true}>
+                  not signed in yet
+                </Link>
+              </button>
             </div>
           </div>
           <div className=" hidden md:block ">

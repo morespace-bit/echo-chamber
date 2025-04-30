@@ -4,6 +4,7 @@ import { db, auth } from "../Firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function UserData() {
   const [u_id, setUId] = useState("");
@@ -22,15 +23,16 @@ function UserData() {
     return () => unsubscribe();
   }, []); // Empty dependency array ensures this runs once
   console.log(u_id);
-  const userRef = doc(db, "User", u_id); // Correct collection + document ID
   const [username, setUsername] = useState("");
   const [url, setUrl] = useState("");
   const navigate = useNavigate();
 
   // Upload to Cloudinary and get URL
+
   async function fileUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
+    // Correct collection + document ID
 
     const data = new FormData();
     data.append("file", file);
@@ -56,6 +58,7 @@ function UserData() {
     }
 
     // Save user data to Firestore using setDoc
+    const userRef = doc(db, "User", u_id);
     await setDoc(userRef, {
       username: username,
       Photo: url,

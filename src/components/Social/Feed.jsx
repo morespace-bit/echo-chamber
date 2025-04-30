@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { auth, db } from "../Firebase/config";
 import { collection, doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
+import CreateFeed from "./CreateFeed";
 
 export default function Feed() {
   const access = "NwOv9pWQXKBglEwy86f3MuovcXmg6_I9j3eREpqFf5U";
   const [img, setImg] = useState([]);
   const [userData, setUserData] = useState(null);
   const [u_id, setUId] = useState(null); // Use state for UID
+  const [imageUpload, setImageUpload] = useState(false);
 
   // Fetching images from Unsplash API
   async function get() {
@@ -49,9 +51,8 @@ export default function Feed() {
 
   // Fetch user profile and images once the user is authenticated
   useEffect(() => {
-    if (u_id) {
-      getUserProfile(); // Fetch user data only after u_id is set
-    }
+    getUserProfile(); // Fetch user data only after u_id is set
+
     get(); // Fetch Unsplash images
   }, [u_id]); // Run this effect when u_id changes
 
@@ -66,20 +67,50 @@ export default function Feed() {
         {/* Center part */}
         <div className="w-full text-center p-6 flex justify-center items-center flex-col overflow-y-auto mx-h-[100%] ">
           {/* Create feed and user name part */}
-          <div className="flex p-6 bg-white mb-5 rounded-xl shadow-xl max-w-150 flex-col ">
+          <div className="flex p-6 bg-white mb-5 rounded-xl shadow-xl max-w-150 flex-col gap-4">
             <div className="flex flex-row gap-6">
               {/* user profile */}
-              <div className="rounded-full overflow-hidden w-10 h-10">
+              <div className="rounded-full overflow-hidden w-10 h-10 ">
                 <img
                   src={userData?.Photo}
                   alt=""
-                  className=" object-cover w-full h-full"
+                  className=" object-cover w-full h-full cursor-pointer"
                 />
               </div>
               <input
                 type="text"
-                className="bg-gray-200 rounded-2xl px-5 py-3 w-110"
+                className="bg-gray-200 rounded-2xl px-5 py-3 w-80 md:w-120 cursor-pointer"
+                placeholder={`What's on your mind, ${userData?.username}`}
               />
+            </div>
+            <div className="flex flex-row justify-around items-center">
+              <div
+                className="flex flex-row items-center gap-1 cursor-pointer hover:bg-gray-100 rounded-xl duration-75 ease-in p-2"
+                onClick={() => {
+                  setImageUpload((pre) => !pre);
+                }}
+              >
+                <img src={"/image.png"} alt="" className="h-10" />
+                <p>Images</p>
+              </div>
+              <div
+                className="flex flex-row items-center gap-1 cursor-pointer hover:bg-gray-100 rounded-xl duration-75 ease-in p-2"
+                onClick={() => {
+                  setImageUpload((pre) => !pre);
+                }}
+              >
+                <img src={"/thought-bubble.png"} alt="" className="h-10" />
+                <p>Thoughts</p>
+              </div>
+              <div
+                className="flex flex-row items-center gap-1 cursor-pointer hover:bg-gray-100 rounded-xl duration-75 ease-in p-2"
+                onClick={() => {
+                  setImageUpload((pre) => !pre);
+                }}
+              >
+                <img src={"/activity.png"} alt="" className="h-10" />
+                <p>Activity</p>
+              </div>
             </div>
           </div>
           {img.map((i) => (
@@ -118,6 +149,9 @@ export default function Feed() {
         <div className="r-0 t-20 fixed">
           <h1>Right</h1>
         </div>
+        {imageUpload == true && (
+          <CreateFeed userData={userData} setImageUpload={setImageUpload} />
+        )}
       </div>
     </>
   );
