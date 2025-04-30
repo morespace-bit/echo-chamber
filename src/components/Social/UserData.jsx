@@ -1,11 +1,26 @@
 import React, { useState } from "react";
 import { getDoc, setDoc, doc } from "firebase/firestore";
-import { db } from "../Firebase/config";
+import { db, auth } from "../Firebase/config";
+import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function UserData() {
-  const u_id = useSelector((state) => state.auth.userData); // Ensure you are getting uid
+  const [u_id, setUId] = useState("");
+  useEffect(() => {
+    // Handle user authentication state change
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("User UID:", user.uid);
+        setUId(user.uid); // Set the UID in state
+      } else {
+        console.log("No user logged in");
+      }
+    });
+
+    // Cleanup subscription on component unmount
+    return () => unsubscribe();
+  }, []); // Empty dependency array ensures this runs once
   console.log(u_id);
   const userRef = doc(db, "User", u_id); // Correct collection + document ID
   const [username, setUsername] = useState("");
