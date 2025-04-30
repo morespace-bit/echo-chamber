@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { auth, googleProvider } from "../components/Firebase/config.js";
+import { login, logout } from "../store/Features/authSlice.js";
+import { useDispatch, useSelector } from "react-redux";
 import {
   signInWithPopup,
   signInWithRedirect,
@@ -9,25 +11,20 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
-  const [email, setemail] = useState("");
+  const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const [user, setUser] = useState({});
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  async function forMobile() {
-    await signInWithRedirect(auth, googleProvider);
-  }
+  const navigate = useNavigate();
 
   //  google auth
   async function google() {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       const info = result.user;
-      setUser((pre) => ({
-        displayName: info.displayName,
-        photo: info.photoURL,
-      }));
-      navigate("/welcome");
+      const user = info.uid;
+      dispatch(login(user));
+      navigate("/userdata", { replace: true });
     } catch (err) {
       console.log(err);
     }
@@ -36,7 +33,11 @@ export default function Signup() {
   // user with email and password
   async function createUser() {
     try {
-      await createUserWithEmailAndPassword(auth, email, pass);
+      const result = await createUserWithEmailAndPassword(auth, email, pass);
+      const info = result.user;
+      const user = info.uid;
+      dispatch(login(user));
+      navigate("/userdata");
     } catch (err) {
       console.error(err);
     }
@@ -65,7 +66,7 @@ export default function Signup() {
                 placeholder="Enter your Email"
                 className="px-4 py-5 border border-gray-500 rounded-xs w-full"
                 onChange={(e) => {
-                  Setemail(e.target.value);
+                  setEmail(e.target.value);
                 }}
               />
             </div>

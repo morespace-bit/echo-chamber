@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
 export default function Feed() {
   const access = "NwOv9pWQXKBglEwy86f3MuovcXmg6_I9j3eREpqFf5U";
   const [img, setImg] = useState([]);
+
   async function get() {
     const res = await fetch(
       `https://api.unsplash.com/photos/?client_id=${access}`

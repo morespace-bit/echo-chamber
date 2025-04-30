@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   signInWithPopup,
   createUserWithEmailAndPassword,
@@ -9,6 +9,9 @@ import { useState } from "react";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  // login function
   async function login(email, password) {
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -16,6 +19,8 @@ export default function Login() {
         email,
         password
       );
+      navigate("/welcome");
+
       const user = userCredential.user;
     } catch (error) {
       console.error("Login failed:", error.message);
@@ -54,7 +59,7 @@ export default function Login() {
                 placeholder="Enter your Password"
                 className="px-4 py-5 border border-gray-500 rounded-xs w-full"
                 onChange={(e) => {
-                  e.target.value;
+                  setPassword(e.target.value);
                 }}
               />
             </div>
@@ -91,7 +96,9 @@ export default function Login() {
             </div>
             {/* if not signed in yet */}
             <div className="flex justify-center items-center">
-              <Link to="/signup">not signed in yet</Link>
+              <Link to="/signup" replace={true}>
+                not signed in yet
+              </Link>
             </div>
           </div>
           <div className=" hidden md:block ">

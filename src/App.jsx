@@ -8,7 +8,9 @@ function App() {
     <>
       <div className="flex justify-center items-center min-h-screen flex-col">
         <h1>This is the home page of the app</h1>
-        <Link to="login">Go to login</Link>
+        <Link to="login" replace={true}>
+          Go to login
+        </Link>
       </div>
     </>
   );

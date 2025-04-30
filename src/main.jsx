@@ -1,5 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import store from "./store/store.js";
 import "./index.css";
 import {
   createBrowserRouter,
@@ -13,10 +15,12 @@ import Signup from "./components/Signup.jsx";
 import Login from "./components/Login.jsx";
 import Social1 from "./components/Social/Social1.jsx";
 import Forlogin from "./components/Animation/Forlogin.jsx";
+import UserData from "./components/Social/UserData.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
+      <Route path="/userdata" element={<UserData />} />
       <Route path="/welcome" element={<Forlogin />} />
       <Route path="/feed" element={<Social1 />} />
       <Route path="/" element={<App />} />
@@ -28,6 +32,8 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>
 );
