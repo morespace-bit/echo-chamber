@@ -116,7 +116,9 @@ export default function Signup() {
             </div>
             <div className="flex justify-center items-center">
               <button className="bg-blue-300 rounded-2xl p-4 hover:bg-blue-800 duration-75 ease-in">
-                <Link to="/login">already signed in</Link>
+                <Link to="/login" replace={true}>
+                  already signed in
+                </Link>
               </button>
             </div>
           </div>

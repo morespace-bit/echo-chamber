@@ -1,12 +1,11 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 function CreateFeed({ userData, setImageUpload }) {
   console.log(userData);
   return (
     <div className=" fixed top-30 w-full flex justify-center items-center">
       {/* card container */}
-      <div className=" rounded-xl shadow-2xl bg-white flex justify-center items-center flex-col w-110 md:w-140 relative p-4">
+      <div className=" rounded-xl shadow-2xl bg-white flex justify-center items-center flex-col w-110 md:w-140 relative p-4c">
         <h1 className="font-semibold text-2xl font-sans">Create post</h1>
         <img
           onClick={() => {
