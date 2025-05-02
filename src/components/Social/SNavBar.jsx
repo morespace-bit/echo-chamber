@@ -12,7 +12,7 @@ function SNavBar() {
           </h1>
         </div>
         {/* search bar */}
-        <div className="bg-cyan-100 rounded-2xl px-4 py-2 flex gap-2 shadow-2xl">
+        <div className="bg-gray-500 rounded-2xl px-4 py-2 flex gap-2 ">
           <img src="/search.svg" alt="" />
           <input
             type="text"

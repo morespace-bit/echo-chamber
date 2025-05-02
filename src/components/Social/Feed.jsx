@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import { auth, db } from "../Firebase/config";
-import { collection, doc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  orderBy,
+  getDoc,
+} from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import CreateFeed from "./CreateFeed";
 
@@ -10,18 +17,9 @@ export default function Feed() {
   const [userData, setUserData] = useState(null);
   const [u_id, setUId] = useState(null); // Use state for UID
   const [imageUpload, setImageUpload] = useState(false);
+  const [post, setPost] = useState(null);
 
-  // Fetching images from Unsplash API
-  async function get() {
-    const res = await fetch(
-      `https://api.unsplash.com/photos/?client_id=${access}`
-    );
-    const data = await res.json();
-    setImg(data);
-    console.log(data);
-  }
-
-  // Fetching user data from Firebase
+  // geting user profile form firebase
   async function getUserProfile() {
     if (!u_id) return;
     const profileRef = doc(db, "User", u_id);
@@ -32,6 +30,16 @@ export default function Feed() {
     } else {
       console.log("No profile found");
     }
+  }
+
+  // getting user post form the firebase firestore
+  async function getPost() {
+    let postRef = collection(db, "Post");
+    let q = query(postRef, orderBy("CreatedAt", "desc"));
+    let res = await getDocs(q);
+    let data = res.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    setPost(data);
+    console.log(data);
   }
 
   useEffect(() => {
@@ -45,28 +53,53 @@ export default function Feed() {
       }
     });
 
-    // Cleanup subscription on component unmount
     return () => unsubscribe();
-  }, []); // Empty dependency array ensures this runs once
+  }, []);
 
-  // Fetch user profile and images once the user is authenticated
   useEffect(() => {
-    getUserProfile(); // Fetch user data only after u_id is set
-
-    get(); // Fetch Unsplash images
-  }, [u_id]); // Run this effect when u_id changes
+    getUserProfile();
+    getPost();
+  }, [u_id]);
 
   return (
     <>
       <div className="flex w-full md:justify-between items-center justify-center flex-9/12 bg-gray-200 overflow-x-hidden overflow-y-auto">
         {/* Left part */}
         <div className="hidden md:block fixed left-0 top-30 h-full">
-          <h1>Lefts</h1>
+          {/* card container   */}
+          <div className="flex flex-col p-5 bg-rose-50 rounded-2xl ml-4 shadow-2xl">
+            <div className="flex flex-row items-center gap-2  hover:bg-gray-300 p-3 rounded-xl cursor-pointer">
+              <img src={"/group.png"} alt="" className="h-8" />
+              <p className="">Friends</p>
+            </div>
+
+            <div className="flex flex-row items-center gap-2 mb-3  hover:bg-gray-300 p-3 rounded-xl cursor-pointer">
+              <img src={"/history.png"} alt="" className="h-6" />
+              <p className="">Memories</p>
+            </div>
+            <div className="flex flex-row items-center gap-2  hover:bg-gray-300 p-3 rounded-xl cursor-pointer">
+              <img src={"/vibes.png"} alt="" className="h-6" />
+              <p className="">Vibes</p>
+            </div>
+            <div className="flex flex-row items-center gap-2  hover:bg-gray-300 p-3 rounded-xl cursor-pointer">
+              <img src={"/peace.png"} alt="" className="h-8" />
+              <p className="">Peace</p>
+            </div>
+            <div className="flex flex-row items-center gap-2  hover:bg-gray-300 p-3 rounded-xl cursor-pointer">
+              <img src={"/cpu.png"} alt="" className="h-8" />
+              <p className="">Tech News</p>
+            </div>
+            <div className="flex flex-row items-center gap-2  hover:bg-gray-300 p-3 rounded-xl cursor-pointer">
+              <img src={"/home.png"} alt="" className="h-8" />
+              <p className="">Home Feed</p>
+            </div>
+          </div>
         </div>
 
         {/* Center part */}
         <div className="w-full text-center p-6 flex justify-center items-center flex-col overflow-y-auto mx-h-[100%] ">
           {/* Create feed and user name part */}
+          {/* feed creating part like the one which opens the create feed or post */}
           <div className="flex p-6 bg-white mb-5 rounded-xl shadow-xl max-w-150 flex-col gap-4">
             <div className="flex flex-row gap-6">
               {/* user profile */}
@@ -81,6 +114,9 @@ export default function Feed() {
                 type="text"
                 className="bg-gray-200 rounded-2xl px-5 py-3 w-80 md:w-120 cursor-pointer"
                 placeholder={`What's on your mind, ${userData?.username}`}
+                onClick={() => {
+                  setImageUpload((pre) => !pre);
+                }}
               />
             </div>
             <div className="flex flex-row justify-around items-center">
@@ -113,33 +149,47 @@ export default function Feed() {
               </div>
             </div>
           </div>
-          {img.map((i) => (
+
+          {/* the acutal post starts from here */}
+
+          {post?.map((i) => (
             <div
-              key={i.id}
+              key={i?.id}
               className="flex p-6 bg-white mb-5 rounded-xl shadow-xl max-h-180 max-w-150 flex-col"
             >
               {/* Profile and date uploaded */}
               <div className="mb-4 flex items-center gap-4">
-                <img
-                  src={i.user.profile_image.large}
-                  alt=""
-                  className="w-10 object-cover rounded-full"
-                />
+                <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-300">
+                  <img
+                    src={i.Profile}
+                    alt=""
+                    className="object-cover h-full w-full"
+                  />
+                </div>
                 <div className="flex flex-col">
-                  <p className="tracking-widest">{i.user.first_name}</p>
+                  <p className="tracking-widest">{i?.Username}</p>
                   <p className="text-xs">4 hours ago</p>
                 </div>
               </div>
               {/* Description */}
-              <div className="flex">
-                <p className="left">{i.description}</p>
+              <div className="flex justify-start items-start mb-4">
+                <p className="text-left">{i?.Content}</p>
               </div>
+              {/* actual images and files */}
               <div className="mx-h-140 overflow-hidden rounded-xl">
-                <img
-                  src={i.urls.regular}
-                  alt=""
-                  className="rounded-xl w-full "
-                />
+                <img src={i?.Url} alt="" className="rounded-xl w-full " />
+              </div>
+              {/* divider for the comment and like */}
+              <div className="border-b-2 border-gray-400 flex justify-center items-center mt-2"></div>
+              <div className="flex flex-row px-2 py-2 justify-around">
+                <div className="flex flex-row gap-2 items-center">
+                  <img src={"/love.png"} alt="" className="h-5 " />
+                  <p>Likes 224</p>
+                </div>
+                <div className="flex flex-row gap-2 items-center">
+                  <img src={"/comments.png"} alt="" className="h-5 " />
+                  <p>Comments 224</p>
+                </div>
               </div>
             </div>
           ))}
@@ -150,7 +200,12 @@ export default function Feed() {
           <h1>Right</h1>
         </div>
         {imageUpload == true && (
-          <CreateFeed userData={userData} setImageUpload={setImageUpload} />
+          <CreateFeed
+            userData={userData}
+            setImageUpload={setImageUpload}
+            u_id={u_id}
+            getPost={getPost}
+          />
         )}
       </div>
     </>

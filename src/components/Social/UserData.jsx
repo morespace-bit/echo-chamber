@@ -19,21 +19,22 @@ function UserData() {
       }
     });
 
-    // Cleanup subscription on component unmount
+  
     return () => unsubscribe();
-  }, []); // Empty dependency array ensures this runs once
+  }, []); 
   console.log(u_id);
   const [username, setUsername] = useState("");
   const [url, setUrl] = useState("");
   const navigate = useNavigate();
 
-  // Upload to Cloudinary and get URL
+
+
+  // Upload to Cloudinary and get URL function
 
   async function fileUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
     // Correct collection + document ID
-
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", "file-upload");
