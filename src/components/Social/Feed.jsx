@@ -18,6 +18,7 @@ export default function Feed() {
   const [u_id, setUId] = useState(null); // Use state for UID
   const [imageUpload, setImageUpload] = useState(false);
   const [post, setPost] = useState(null);
+  const [likes, setLikes] = useState(0);
 
   // geting user profile form firebase
   async function getUserProfile() {
@@ -67,7 +68,7 @@ export default function Feed() {
         {/* Left part */}
         <div className="hidden md:block fixed left-0 top-30 h-full">
           {/* card container   */}
-          <div className="flex flex-col p-5 bg-rose-50 rounded-2xl ml-4 shadow-2xl">
+          <div className="flex flex-col p-5 bg-gray-100 rounded-2xl ml-4 shadow-2xl h-[80%] mb-4">
             <div className="flex flex-row items-center gap-2  hover:bg-gray-300 p-3 rounded-xl cursor-pointer">
               <img src={"/group.png"} alt="" className="h-8" />
               <p className="">Friends</p>
@@ -182,12 +183,12 @@ export default function Feed() {
               {/* divider for the comment and like */}
               <div className="border-b-2 border-gray-400 flex justify-center items-center mt-2"></div>
               <div className="flex flex-row px-2 py-2 justify-around">
-                <div className="flex flex-row gap-2 items-center">
-                  <img src={"/love.png"} alt="" className="h-5 " />
+                <div className="flex flex-row gap-2 items-center cursor-pointer">
+                  <img src={"/love.png"} alt="" className="h-6 " />
                   <p>Likes 224</p>
                 </div>
-                <div className="flex flex-row gap-2 items-center">
-                  <img src={"/comments.png"} alt="" className="h-5 " />
+                <div className="flex flex-row gap-2 items-center cursor-pointer">
+                  <img src={"/comments.png"} alt="" className="h-6 " />
                   <p>Comments 224</p>
                 </div>
               </div>

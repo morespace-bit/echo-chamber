@@ -50,6 +50,7 @@ function CreateFeed({ userData, setImageUpload, u_id, getPost }) {
         Url: url,
         Profile: userData.Photo,
         CreatedAt: serverTimestamp(),
+        Likes: 0,
       });
       setImageUpload((pre) => !pre);
       getPost();
@@ -80,7 +81,6 @@ function CreateFeed({ userData, setImageUpload, u_id, getPost }) {
           <input
             onChange={(e) => {
               setContent(e.target.value);
-              
             }}
             type="text"
             placeholder={`What's on your mind, ${userData?.username}`}

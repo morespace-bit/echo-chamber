@@ -7,7 +7,7 @@ function Forlogin() {
   useEffect(() => {
     setTimeout(() => {
       navigate("/feed", { replace: true });
-    }, 3000);
+    }, 5000);
   }, []);
   return (
     <>
