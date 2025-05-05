@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getDoc, setDoc, doc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import { db, auth } from "../Firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -19,15 +19,12 @@ function UserData() {
       }
     });
 
-  
     return () => unsubscribe();
-  }, []); 
+  }, []);
   console.log(u_id);
   const [username, setUsername] = useState("");
   const [url, setUrl] = useState("");
   const navigate = useNavigate();
-
-
 
   // Upload to Cloudinary and get URL function
 

@@ -1,8 +1,59 @@
-export default function Comment({ userData }) {
-  console.log(userData);
+import { useEffect, useState } from "react";
+import { db, auth } from "../Firebase/config";
+import {
+  collection,
+  doc,
+  query,
+  orderBy,
+  serverTimestamp,
+  Timestamp,
+  addDoc,
+  getDocs,
+} from "firebase/firestore";
+export default function Comment({ userData, postId, open, close }) {
+  const [content, setContent] = useState("");
+  const [comment, setComment] = useState([]);
+
+  // getting the comments form the firebase database
+
+  const getComment = async () => {
+    const pcommentRef = collection(db, "Post", postId, "comment");
+    const q = query(pcommentRef, orderBy("Timestamp", "desc"));
+    const res = await getDocs(pcommentRef);
+    const data = res.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    setComment(data);
+  };
+
+  // posting the data to the firebase databse
+
+  const PostComment = async () => {
+    if (content.trim().length === 0) {
+      alert("Please enter a comment");
+      return;
+    }
+    const commentRef = collection(doc(db, "Post", postId), "comment");
+    await addDoc(commentRef, {
+      username: userData.username,
+      Photo: userData.Photo,
+      content: content,
+      Timestamp: serverTimestamp(),
+    });
+    getComment();
+    setContent((pre) => {
+      return (pre = "");
+    });
+  };
+
+  useEffect(() => {
+    getComment();
+  });
+
   return (
     //  main container of the comments
-    <div className="flex justify-center items-center w-full bg-white mt-3">
+    <div className="flex   w-full bg-white mt-3 flex-col">
       {/* now the add a comment section */}
       <div className="flex  items-center gap-3">
         {/* div for making the profile pic circle */}
@@ -14,17 +65,61 @@ export default function Comment({ userData }) {
           />
         </div>
         {/* the comment input type div */}
-        <div className="flex items-center flex-1 min-w-90 max-w-170 md:w-120 bg-gray-200 rounded-xl p-2">
+        <div className="flex items-center flex-1 min-w-90 max-w-170 md:w-120 bg-gray-200 rounded-xl p-2 cursor-pointer">
           <input
             type="text"
-            className="w-full outline-none px-2"
+            className="w-full outline-none px-2 cursor-pointer"
             placeholder="Add a comment..."
+            value={content}
+            onChange={(e) => {
+              setContent(e.target.value);
+            }}
           />
-          <button className="p-2 bg-blue-300 px-4 rounded-2xl hover:bg-blue-500 hover:scale-105 active:scale-95 duration-75 ease-in">
+          <button
+            className="p-2 bg-blue-300 px-4 rounded-2xl hover:bg-blue-500 hover:scale-105 active:scale-95 duration-75 ease-in cursor-pointer"
+            onClick={PostComment}
+          >
             Add
           </button>
         </div>
       </div>
+      {/* the comments of all the people mapped */}
+      {open[postId] && (
+        <div className=" absolute bg-white shadow-2xl shadow-blue-200 w-105 rounded-xl h-115 overflow-y-auto md:w-150 top-100">
+          <div className="mt-3  justify-center items-center flex gap-5 relative">
+            <h2 className="text-xl font-semibold">Comments</h2>
+            <img
+              src={"/close.png"}
+              alt=""
+              className="h-8 absolute right-4 cursor-pointer hover:scale-120 active:scale-95 duration-75 ease-in"
+              onClick={() => {
+                close(postId);
+              }}
+            />
+          </div>
+          {comment.map((c) => {
+            return (
+              <div className="flex  gap-3 mt-2 p-2" key={c.id}>
+                {/* image of the person */}
+                <div className="rounded-full overflow-hidden object-cover w-8 h-8 ">
+                  <img
+                    src={c.Photo}
+                    alt="user-profile"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                {/* the content and username */}
+                <div className="bg-gray-300 flex flex-col p-3 rounded-2xl">
+                  <h2 className="text-black text-xl font-semibold text-left ">
+                    {c.username}
+                  </h2>
+                  <p>{c.content}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

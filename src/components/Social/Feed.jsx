@@ -16,10 +16,11 @@ export default function Feed() {
   const access = "NwOv9pWQXKBglEwy86f3MuovcXmg6_I9j3eREpqFf5U";
   const [img, setImg] = useState([]);
   const [userData, setUserData] = useState(null);
-  const [u_id, setUId] = useState(null); // Use state for UID
+  const [u_id, setUId] = useState(""); // Use state for UID
   const [imageUpload, setImageUpload] = useState(false);
   const [post, setPost] = useState(null);
   const [likedPost, setLikedPost] = useState({});
+  const [commentPost, setCommentPost] = useState({});
 
   // function to set liked and unlike ui
   const like = (id) => {
@@ -30,6 +31,15 @@ export default function Feed() {
       };
     });
     console.log(likedPost);
+  };
+
+  const comment = (id) => {
+    setCommentPost((pre) => {
+      return {
+        ...pre,
+        [id]: !pre[id],
+      };
+    });
   };
 
   // geting user profile form firebase
@@ -109,7 +119,7 @@ export default function Feed() {
         </div>
 
         {/* Center part */}
-        <div className="w-full text-center p-6 flex justify-center items-center flex-col overflow-y-auto mx-h-[100%] ">
+        <div className="w-full text-center p-6 flex justify-center items-center flex-col overflow-y-auto mx-h-[100%]  ">
           {/* Create feed and user name part */}
           {/* feed creating part like the one which opens the create feed or post */}
           <div className="flex p-6 bg-white mb-5 rounded-xl shadow-xl max-w-150 flex-col gap-4">
@@ -174,7 +184,7 @@ export default function Feed() {
                 <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-300">
                   <img
                     src={i.Profile}
-                    alt=""
+                    alt="profile-icon"
                     className="object-cover h-full w-full"
                   />
                 </div>
@@ -203,16 +213,30 @@ export default function Feed() {
                   <img
                     src={likedPost[i.id] ? "/red-love.png" : "/love.png"}
                     alt=""
-                    className="h-6 "
+                    className="h-6 hover:shadow-4xl hover:shadow-rose-500 duration-75 ease-in active:scale-95 hover:scale-120"
                   />
                   <p>Likes 224</p>
                 </div>
-                <div className="flex flex-row gap-2 items-center cursor-pointer">
-                  <img src={"/comments.png"} alt="" className="h-6 " />
+                <div
+                  className="flex flex-row gap-2 items-center cursor-pointer"
+                  onClick={() => {
+                    comment(i.id);
+                  }}
+                >
+                  <img
+                    src={"/comments.png"}
+                    alt=""
+                    className="h-6 hover:shadow-4xl hover:shadow-rose-500 duration-75 ease-in active:scale-95 hover:scale-120"
+                  />
                   <p>Comments 224</p>
                 </div>
               </div>
-              <Comment userData={userData} />
+              <Comment
+                userData={userData}
+                postId={i.id}
+                open={commentPost}
+                close={comment}
+              />
             </div>
           ))}
         </div>
