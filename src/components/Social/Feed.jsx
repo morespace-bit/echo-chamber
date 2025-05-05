@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import CreateFeed from "./CreateFeed";
+import Comment from "./Comment";
 
 export default function Feed() {
   const access = "NwOv9pWQXKBglEwy86f3MuovcXmg6_I9j3eREpqFf5U";
@@ -27,7 +28,6 @@ export default function Feed() {
     const res = await getDoc(profileRef);
     if (res.exists()) {
       setUserData(res.data());
-      console.log(res.data());
     } else {
       console.log("No profile found");
     }
@@ -40,7 +40,7 @@ export default function Feed() {
     let res = await getDocs(q);
     let data = res.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
     setPost(data);
-    console.log(data);
+    console.log(data[0].id);
   }
 
   useEffect(() => {
@@ -192,6 +192,7 @@ export default function Feed() {
                   <p>Comments 224</p>
                 </div>
               </div>
+              <Comment userData={userData} />
             </div>
           ))}
         </div>
