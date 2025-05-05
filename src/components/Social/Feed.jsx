@@ -21,6 +21,17 @@ export default function Feed() {
   const [post, setPost] = useState(null);
   const [likedPost, setLikedPost] = useState({});
 
+  // function to set liked and unlike ui
+  const like = (id) => {
+    setLikedPost((pre) => {
+      return {
+        ...pre,
+        [id]: !pre[id],
+      };
+    });
+    console.log(likedPost);
+  };
+
   // geting user profile form firebase
   async function getUserProfile() {
     if (!u_id) return;
@@ -185,10 +196,12 @@ export default function Feed() {
               <div className="flex flex-row px-2 py-2 justify-around">
                 <div
                   className="flex flex-row gap-2 items-center cursor-pointer"
-                  onClick={() => setLiked((pre) => !pre)}
+                  onClick={() => {
+                    like(i.id);
+                  }}
                 >
                   <img
-                    src={liked ? "/red-love.png" : "/love.png"}
+                    src={likedPost[i.id] ? "/red-love.png" : "/love.png"}
                     alt=""
                     className="h-6 "
                   />
