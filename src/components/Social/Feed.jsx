@@ -21,6 +21,17 @@ export default function Feed() {
   const [post, setPost] = useState(null);
   const [likedPost, setLikedPost] = useState({});
   const [commentPost, setCommentPost] = useState({});
+  const [likesOfPost, setLikesOfPost] = useState(null);
+
+  // function to generate random likes
+  const genLikes = (id) => {
+    let likes = Math.floor(Math.random() * 500 + 1);
+
+    setLikesOfPost((pre) => ({
+      ...pre,
+      [id]: likes,
+    }));
+  };
 
   // function to set liked and unlike ui
   const like = (id) => {
@@ -215,20 +226,16 @@ export default function Feed() {
                     alt=""
                     className="h-6 hover:shadow-4xl hover:shadow-rose-500 duration-75 ease-in active:scale-95 hover:scale-120"
                   />
-                  <p>Likes 224</p>
+                  <p>Likes </p>
                 </div>
                 <div
-                  className="flex flex-row gap-2 items-center cursor-pointer"
+                  className="flex flex-row gap-2 items-center cursor-pointer hover:shadow-4xl hover:shadow-rose-500 duration-75 ease-in active:scale-95 hover:scale-120"
                   onClick={() => {
                     comment(i.id);
                   }}
                 >
-                  <img
-                    src={"/comments.png"}
-                    alt=""
-                    className="h-6 hover:shadow-4xl hover:shadow-rose-500 duration-75 ease-in active:scale-95 hover:scale-120"
-                  />
-                  <p>Comments 224</p>
+                  <img src={"/comments.png"} alt="" className="h-6 " />
+                  <p>Comments</p>
                 </div>
               </div>
               <Comment

@@ -99,6 +99,12 @@ export default function Comment({ userData, postId, open, close }) {
               }}
             />
           </div>
+
+          {comment.length === 0 && (
+            <div className="mt-20">
+              <p className="text-2xl">No comments</p>
+            </div>
+          )}
           {comment.map((c) => {
             return (
               <div className="flex  gap-3 mt-2 p-2" key={c.id}>
