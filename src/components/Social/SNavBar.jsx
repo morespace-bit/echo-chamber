@@ -4,7 +4,7 @@ function SNavBar() {
   return (
     <>
       {/* // main container */}
-      <div className="bg-white w-full flex px-4 py-6 justify-between items-center md:px-10 sticky top-0 overflow-x-hidden shadow-2xs flex-3/12">
+      <div className="bg-white w-full flex px-4 py-6 justify-between items-center md:px-10 sticky top-0 overflow-x-hidden shadow-2xs z-10">
         {/* for logo  */}
         <div>
           <h1 className="font-black text-xl md:text-3xl text-black font-serif cursor-pointer ">

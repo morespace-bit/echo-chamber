@@ -52,40 +52,42 @@ export default function Comment({ userData, postId, open, close }) {
   });
 
   return (
-    //  main container of the comments
-    <div className="flex   w-full bg-white mt-3 flex-col">
-      {/* now the add a comment section */}
-      <div className="flex  items-center gap-3">
-        {/* div for making the profile pic circle */}
-        <div className="w-10 h-10 rounded-full  overflow-hidden border-2 border-gray-200">
-          <img
-            src={userData?.Photo}
-            alt=""
-            className="h-full w-full object-cover"
-          />
-        </div>
-        {/* the comment input type div */}
-        <div className="flex items-center flex-1 min-w-90 max-w-170 md:w-120 bg-gray-200 rounded-xl p-2 cursor-pointer">
-          <input
-            type="text"
-            className="w-full outline-none px-2 cursor-pointer"
-            placeholder="Add a comment..."
-            value={content}
-            onChange={(e) => {
-              setContent(e.target.value);
-            }}
-          />
-          <button
-            className="p-2 bg-blue-300 px-4 rounded-2xl hover:bg-blue-500 hover:scale-105 active:scale-95 duration-75 ease-in cursor-pointer"
-            onClick={PostComment}
-          >
-            Add
-          </button>
+    <>
+      {/* main container for comment */}
+      <div className="flex   w-full bg-white mt-3 flex-col">
+        {/* now the add a comment section */}
+        <div className="flex  items-center gap-3">
+          {/* div for making the profile pic circle */}
+          <div className="w-10 h-10 rounded-full  overflow-hidden border-2 border-gray-200">
+            <img
+              src={userData?.Photo}
+              alt=""
+              className="h-full w-full object-cover"
+            />
+          </div>
+          {/* the comment input type div */}
+          <div className="flex items-center flex-1 min-w-90 max-w-170 md:w-120 bg-gray-200 rounded-xl p-2 cursor-pointer">
+            <input
+              type="text"
+              className="w-full outline-none px-2 cursor-pointer"
+              placeholder="Add a comment..."
+              value={content}
+              onChange={(e) => {
+                setContent(e.target.value);
+              }}
+            />
+            <button
+              className="p-2 bg-blue-300 px-4 rounded-2xl hover:bg-blue-500 hover:scale-105 active:scale-95 duration-75 ease-in cursor-pointer"
+              onClick={PostComment}
+            >
+              Add
+            </button>
+          </div>
         </div>
       </div>
       {/* the comments of all the people mapped */}
       {open[postId] && (
-        <div className=" absolute bg-white shadow-2xl shadow-blue-200 w-105 rounded-xl h-115 overflow-y-auto md:w-150 top-100">
+        <div className=" absolute bg-white shadow-2xl shadow-blue-200 w-105 rounded-xl h-115 overflow-y-auto md:w-150">
           <div className="mt-3  justify-center items-center flex gap-5 relative">
             <h2 className="text-xl font-semibold">Comments</h2>
             <img
@@ -120,6 +122,6 @@ export default function Comment({ userData, postId, open, close }) {
           })}
         </div>
       )}
-    </div>
+    </>
   );
 }
