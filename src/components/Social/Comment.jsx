@@ -10,12 +10,12 @@ import {
   addDoc,
   getDocs,
 } from "firebase/firestore";
+
 export default function Comment({ userData, postId, open, close }) {
   const [content, setContent] = useState("");
   const [comment, setComment] = useState([]);
 
   // getting the comments form the firebase database
-
   const getComment = async () => {
     const pcommentRef = collection(db, "Post", postId, "comment");
     const q = query(pcommentRef, orderBy("Timestamp", "desc"));
@@ -28,7 +28,6 @@ export default function Comment({ userData, postId, open, close }) {
   };
 
   // posting the data to the firebase databse
-
   const PostComment = async () => {
     if (content.trim().length === 0) {
       alert("Please enter a comment");
@@ -49,16 +48,16 @@ export default function Comment({ userData, postId, open, close }) {
 
   useEffect(() => {
     getComment();
-  });
+  }, [postId]);
 
   return (
     <>
       {/* main container for comment */}
-      <div className="flex   w-full bg-white mt-3 flex-col">
+      <div className="flex w-full bg-white dark:bg-gray-800 mt-3 flex-col p-3 rounded-xl shadow-lg dark:shadow-xl">
         {/* now the add a comment section */}
-        <div className="flex  items-center gap-3">
+        <div className="flex items-center gap-3">
           {/* div for making the profile pic circle */}
-          <div className="w-10 h-10 rounded-full  overflow-hidden border-2 border-gray-200">
+          <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-200 dark:border-gray-600">
             <img
               src={userData?.Photo}
               alt=""
@@ -66,10 +65,10 @@ export default function Comment({ userData, postId, open, close }) {
             />
           </div>
           {/* the comment input type div */}
-          <div className="flex items-center flex-1 min-w-90 max-w-170 md:w-120 bg-gray-200 rounded-xl p-2 cursor-pointer">
+          <div className="flex items-center flex-1 min-w-70 max-w-170 md:w-120 bg-gray-200 dark:bg-gray-700 rounded-xl p-2 cursor-pointer">
             <input
               type="text"
-              className="w-full outline-none px-2 cursor-pointer"
+              className="w-full outline-none px-2 bg-transparent text-black dark:text-white cursor-pointer"
               placeholder="Add a comment..."
               value={content}
               onChange={(e) => {
@@ -77,7 +76,7 @@ export default function Comment({ userData, postId, open, close }) {
               }}
             />
             <button
-              className="p-2 bg-blue-300 px-4 rounded-2xl hover:bg-blue-500 hover:scale-105 active:scale-95 duration-75 ease-in cursor-pointer"
+              className="p-2 bg-blue-300 dark:bg-blue-600 px-4 rounded-2xl hover:bg-blue-500 dark:hover:bg-blue-700 hover:scale-105 active:scale-95 duration-75 ease-in cursor-pointer"
               onClick={PostComment}
             >
               Add
@@ -85,11 +84,12 @@ export default function Comment({ userData, postId, open, close }) {
           </div>
         </div>
       </div>
+
       {/* the comments of all the people mapped */}
       {open[postId] && (
-        <div className=" absolute bg-white shadow-2xl shadow-blue-200 w-105 rounded-xl h-115 overflow-y-auto md:w-150">
-          <div className="mt-3  justify-center items-center flex gap-5 relative">
-            <h2 className="text-xl font-semibold">Comments</h2>
+        <div className="absolute bg-white dark:bg-gray-800 shadow-2xl shadow-blue-200 w-105 rounded-xl h-115 overflow-y-auto md:w-150">
+          <div className="mt-3 justify-center items-center flex gap-5 relative">
+            <h2 className="text-xl font-semibold dark:text-white">Comments</h2>
             <img
               src={"/close.png"}
               alt=""
@@ -101,13 +101,14 @@ export default function Comment({ userData, postId, open, close }) {
           </div>
 
           {comment.length === 0 && (
-            <div className="mt-20">
-              <p className="text-2xl">No comments</p>
+            <div className="mt-20 text-center">
+              <p className="text-2xl dark:text-white">No comments</p>
             </div>
           )}
+
           {comment.map((c) => {
             return (
-              <div className="flex  gap-3 mt-2 p-2" key={c.id}>
+              <div className="flex gap-3 mt-2 p-2" key={c.id}>
                 {/* image of the person */}
                 <div className="rounded-full overflow-hidden object-cover w-8 h-8 ">
                   <img
@@ -117,11 +118,11 @@ export default function Comment({ userData, postId, open, close }) {
                   />
                 </div>
                 {/* the content and username */}
-                <div className="bg-gray-300 flex flex-col p-3 rounded-2xl">
-                  <h2 className="text-black text-xl font-semibold text-left ">
+                <div className="bg-gray-300 dark:bg-gray-600 flex flex-col p-3 rounded-2xl">
+                  <h2 className="text-black dark:text-white text-xl font-semibold text-left ">
                     {c.username}
                   </h2>
-                  <p>{c.content}</p>
+                  <p className="text-black dark:text-white">{c.content}</p>
                 </div>
               </div>
             );

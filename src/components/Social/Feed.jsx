@@ -11,6 +11,7 @@ import {
 import { onAuthStateChanged } from "firebase/auth";
 import CreateFeed from "./CreateFeed";
 import Comment from "./Comment";
+import SNavBar from "./SNavBar";
 
 export default function Feed() {
   const access = "NwOv9pWQXKBglEwy86f3MuovcXmg6_I9j3eREpqFf5U";
@@ -95,57 +96,56 @@ export default function Feed() {
   }, [u_id]);
 
   return (
-    <>
-      <div className="flex w-full md:justify-between items-center justify-center flex-9/12 bg-gray-200 overflow-x-hidden overflow-y-auto">
+    <div className="bg-gray-200 dark:bg-gray-800 text-black dark:text-white">
+      <SNavBar userData={userData} />
+      <div className="flex w-full md:justify-between items-center justify-center flex-9/12 overflow-x-hidden overflow-y-auto">
         {/* Left part */}
         <div className="hidden md:block fixed left-0 top-30 h-full">
-          {/* card container   */}
-          <div className="flex flex-col p-5 bg-gray-100 rounded-2xl ml-4 shadow-2xl h-[80%] mb-4">
-            <div className="flex flex-row items-center gap-2  hover:bg-gray-300 p-3 rounded-xl cursor-pointer">
+          {/* card container */}
+          <div className="flex flex-col p-5 bg-gray-100 dark:bg-gray-700 rounded-2xl ml-4 shadow-2xl h-[80%] mb-4">
+            <div className="flex flex-row items-center gap-2 hover:bg-gray-300 dark:hover:bg-gray-600 p-3 rounded-xl cursor-pointer">
               <img src={"/group.png"} alt="" className="h-8" />
-              <p className="">Friends</p>
+              <p>Friends</p>
             </div>
 
-            <div className="flex flex-row items-center gap-2 mb-3  hover:bg-gray-300 p-3 rounded-xl cursor-pointer">
+            <div className="flex flex-row items-center gap-2 mb-3 hover:bg-gray-300 dark:hover:bg-gray-600 p-3 rounded-xl cursor-pointer">
               <img src={"/history.png"} alt="" className="h-6" />
-              <p className="">Memories</p>
+              <p>Memories</p>
             </div>
-            <div className="flex flex-row items-center gap-2  hover:bg-gray-300 p-3 rounded-xl cursor-pointer">
+            <div className="flex flex-row items-center gap-2 hover:bg-gray-300 dark:hover:bg-gray-600 p-3 rounded-xl cursor-pointer">
               <img src={"/vibes.png"} alt="" className="h-6" />
-              <p className="">Vibes</p>
+              <p>Vibes</p>
             </div>
-            <div className="flex flex-row items-center gap-2  hover:bg-gray-300 p-3 rounded-xl cursor-pointer">
+            <div className="flex flex-row items-center gap-2 hover:bg-gray-300 dark:hover:bg-gray-600 p-3 rounded-xl cursor-pointer">
               <img src={"/peace.png"} alt="" className="h-8" />
-              <p className="">Peace</p>
+              <p>Peace</p>
             </div>
-            <div className="flex flex-row items-center gap-2  hover:bg-gray-300 p-3 rounded-xl cursor-pointer">
+            <div className="flex flex-row items-center gap-2 hover:bg-gray-300 dark:hover:bg-gray-600 p-3 rounded-xl cursor-pointer">
               <img src={"/cpu.png"} alt="" className="h-8" />
-              <p className="">Tech News</p>
+              <p>Tech News</p>
             </div>
-            <div className="flex flex-row items-center gap-2  hover:bg-gray-300 p-3 rounded-xl cursor-pointer">
+            <div className="flex flex-row items-center gap-2 hover:bg-gray-300 dark:hover:bg-gray-600 p-3 rounded-xl cursor-pointer">
               <img src={"/home.png"} alt="" className="h-8" />
-              <p className="">Home Feed</p>
+              <p>Home Feed</p>
             </div>
           </div>
         </div>
 
         {/* Center part */}
-        <div className="w-full text-center p-6 flex justify-center items-center flex-col overflow-y-auto mx-h-[100%]  ">
+        <div className="w-full text-center p-6 flex justify-center items-center flex-col overflow-y-auto mx-h-[100%]">
           {/* Create feed and user name part */}
-          {/* feed creating part like the one which opens the create feed or post */}
-          <div className="flex p-6 bg-white mb-5 rounded-xl shadow-xl max-w-150 flex-col gap-4">
+          <div className="flex p-6 bg-white dark:bg-gray-700 mb-5 rounded-xl shadow-xl max-w-150 flex-col gap-4">
             <div className="flex flex-row gap-6">
-              {/* user profile */}
               <div className="rounded-full overflow-hidden w-10 h-10 ">
                 <img
                   src={userData?.Photo}
                   alt=""
-                  className=" object-cover w-full h-full cursor-pointer"
+                  className="object-cover w-full h-full cursor-pointer"
                 />
               </div>
               <input
                 type="text"
-                className="bg-gray-200 rounded-2xl px-5 py-3 w-80 md:w-120 cursor-pointer"
+                className="bg-gray-200 dark:bg-gray-600 rounded-2xl px-5 py-3 w-80 md:w-120 cursor-pointer"
                 placeholder={`What's on your mind, ${userData?.username}`}
                 onClick={() => {
                   setImageUpload((pre) => !pre);
@@ -154,7 +154,7 @@ export default function Feed() {
             </div>
             <div className="flex flex-row justify-around items-center">
               <div
-                className="flex flex-row items-center gap-1 cursor-pointer hover:bg-gray-100 rounded-xl duration-75 ease-in p-2"
+                className="flex flex-row items-center gap-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 rounded-xl duration-75 ease-in p-2"
                 onClick={() => {
                   setImageUpload((pre) => !pre);
                 }}
@@ -163,7 +163,7 @@ export default function Feed() {
                 <p>Images</p>
               </div>
               <div
-                className="flex flex-row items-center gap-1 cursor-pointer hover:bg-gray-100 rounded-xl duration-75 ease-in p-2"
+                className="flex flex-row items-center gap-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 rounded-xl duration-75 ease-in p-2"
                 onClick={() => {
                   setImageUpload((pre) => !pre);
                 }}
@@ -172,7 +172,7 @@ export default function Feed() {
                 <p>Thoughts</p>
               </div>
               <div
-                className="flex flex-row items-center gap-1 cursor-pointer hover:bg-gray-100 rounded-xl duration-75 ease-in p-2"
+                className="flex flex-row items-center gap-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 rounded-xl duration-75 ease-in p-2"
                 onClick={() => {
                   setImageUpload((pre) => !pre);
                 }}
@@ -183,16 +183,14 @@ export default function Feed() {
             </div>
           </div>
 
-          {/* the acutal post starts from here */}
-
+          {/* the actual post starts from here */}
           {post?.map((i) => (
             <div
               key={i?.id}
-              className="flex p-6 bg-white mb-5 rounded-xl shadow-xl max-h-180 max-w-150 flex-col"
+              className="flex p-6 bg-white dark:bg-gray-700 mb-5 rounded-xl shadow-xl max-h-180 max-w-150 flex-col"
             >
-              {/* Profile and date uploaded */}
               <div className="mb-4 flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-300">
+                <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-300 dark:border-gray-600">
                   <img
                     src={i.Profile}
                     alt="profile-icon"
@@ -204,16 +202,13 @@ export default function Feed() {
                   <p className="text-xs">4 hours ago</p>
                 </div>
               </div>
-              {/* Description */}
               <div className="flex justify-start items-start mb-4">
                 <p className="text-left">{i?.Content}</p>
               </div>
-              {/* actual images and files */}
               <div className="mx-h-140 overflow-hidden rounded-xl">
                 <img src={i?.Url} alt="" className="rounded-xl w-full " />
               </div>
-              {/* divider for the comment and like */}
-              <div className="border-b-2 border-gray-400 flex justify-center items-center mt-2"></div>
+              <div className="border-b-2 border-gray-400 dark:border-gray-600 flex justify-center items-center mt-2"></div>
               <div className="flex flex-row px-2 py-2 justify-around">
                 <div
                   className="flex flex-row gap-2 items-center cursor-pointer"
@@ -261,6 +256,6 @@ export default function Feed() {
           />
         )}
       </div>
-    </>
+    </div>
   );
 }

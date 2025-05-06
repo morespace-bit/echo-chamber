@@ -13,19 +13,21 @@ import {
 import App from "./App.jsx";
 import Signup from "./components/Signup.jsx";
 import Login from "./components/Login.jsx";
-import Social1 from "./components/Social/Social1.jsx";
 import Forlogin from "./components/Animation/Forlogin.jsx";
 import UserData from "./components/Social/UserData.jsx";
+import Feed from "./components/Social/Feed.jsx";
+import Profile from "./components/Social/Profile.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/userdata" element={<UserData />} />
       <Route path="/welcome" element={<Forlogin />} />
-      <Route path="/feed" element={<Social1 />} />
+      <Route path="/feed" element={<Feed />} />
       <Route path="/" element={<App />} />
       <Route path="signup" element={<Signup />} />
       <Route path="login" element={<Login />} />
+      <Route path="profile" element={<Profile />} />
     </>
   )
 );
