@@ -20,16 +20,16 @@ function HomeNav() {
           {/* the nav elements for md dispaly */}
           <div className="md:block hidden">
             <div className="flex justify-around gap-4 ">
-              <p className="font-semibold p-2 text-left px-5 hover:bg-cyan-800 duration-200 ease-in-out cursor-pointer text-white rounded-xl">
+              <p className="font-semibold p-2 text-left px-5 hover:bg-cyan-800 duration-200 ease-in-out cursor-pointer text-white rounded-xl hover:shadow-2xl shadow-cyan-200">
                 Home
               </p>
-              <p className="font-semibold  border-white p-2 text-left  px-5 hover:bg-cyan-800 duration-200 ease-in-out cursor-pointer text-white rounded-xl">
+              <p className="font-semibold  border-white p-2 text-left  px-5 hover:bg-cyan-800 duration-200 ease-in-out cursor-pointer text-white rounded-xl hover:shadow-2xl shadow-cyan-200">
                 Comunity
               </p>
-              <p className="font-semibold  border-white  p-2 text-left  px-5 hover:bg-cyan-800 duration-200 ease-in-out cursor-pointer text-white rounded-xl">
+              <p className="font-semibold  border-white  p-2 text-left  px-5 hover:bg-cyan-800 duration-200 ease-in-out cursor-pointer text-white rounded-xl hover:shadow-2xl shadow-cyan-200">
                 Pages
               </p>
-              <p className="font-semibold  border-white  p-2 text-left  px-5 hover:bg-cyan-800 duration-200 ease-in-out cursor-pointer text-white rounded-xl">
+              <p className="font-semibold  border-white  p-2 text-left  px-5 hover:bg-cyan-800 duration-200 ease-in-out cursor-pointer text-white rounded-xl hover:shadow-2xl shadow-cyan-200">
                 Help
               </p>
             </div>
