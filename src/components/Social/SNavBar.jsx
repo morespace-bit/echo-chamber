@@ -14,7 +14,7 @@ function SNavBar({ userData }) {
   return (
     <>
       {/* main container */}
-      <div className="bg-white w-full flex px-4 py-6 justify-between items-center md:px-10 sticky top-0 overflow-x-hidden shadow-2xs z-10 dark:bg-black dark:text-white">
+      <div className="bg-white w-full flex px-4 py-6 justify-between items-center md:px-10 sticky top-0 overflow-x-hidden shadow-2xs z-10 dark:bg-gray-700 dark:text-white">
         {/* logo */}
         <div>
           <h1 className="font-black text-xl md:text-3xl text-black dark:text-white font-serif cursor-pointer">
@@ -37,7 +37,7 @@ function SNavBar({ userData }) {
           <img
             src="/notification.png"
             alt=""
-            className="w-6 cursor-pointer invert dark:invert-0"
+            className="w-6 cursor-pointer  "
             title="Notifications"
           />
 

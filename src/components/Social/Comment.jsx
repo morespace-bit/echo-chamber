@@ -53,7 +53,7 @@ export default function Comment({ userData, postId, open, close }) {
   return (
     <>
       {/* main container for comment */}
-      <div className="flex w-full bg-white dark:bg-gray-800 mt-3 flex-col p-3 rounded-xl shadow-lg dark:shadow-xl">
+      <div className="flex w-full  dark:bg-gray-800 mt-3 flex-col p-3 rounded-xl dark:shadow-xl">
         {/* now the add a comment section */}
         <div className="flex items-center gap-3">
           {/* div for making the profile pic circle */}
