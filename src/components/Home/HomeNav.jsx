@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function HomeNav() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       {/* main container */}
-      <div className="flex items-center justify-between p-4 bg-blue-500 md:px-10 cursor-pointer">
+      <div className="flex items-center justify-between p-3 bg-blue-800 md:px-10 cursor-pointer shadow-2xl shadow-blue-800">
         {/* for logo */}
         <div className="flex gap-2 items-center">
           <img src="/Main-logo.png" alt="" className="w-10 md:w-15" />
@@ -33,10 +34,11 @@ function HomeNav() {
               </p>
             </div>
           </div>
-
-          <button className="bg-white py-2 px-5 cursor-pointer hover:bg-sky-400 hover:text-white rounded-xs duration-100 ease-initial font-semibold hover:shadow-2xl shadow-cyan-200">
-            Login
-          </button>
+          <Link to="/login">
+            <button className="bg-white py-2 px-5 cursor-pointer hover:bg-sky-400 hover:text-white rounded-xs duration-100 ease-initial font-semibold hover:shadow-2xl shadow-cyan-200">
+              Login
+            </button>
+          </Link>
 
           {/* hamburger sign  */}
           <div className="md:hidden">
@@ -65,7 +67,7 @@ function HomeNav() {
           </div>
         </div>
         {isOpen && (
-          <div className="absolute flex flex-col w-full bg-cyan-200 top-17 left-0  gap-1 md:hidden">
+          <div className="absolute flex flex-col w-full bg-cyan-200 top-17 left-0  gap-1 md:hidden z-20">
             <p className="font-semibold p-2 text-left px-5 hover:bg-cyan-800 duration-200 ease-in-out cursor-pointer">
               Home
             </p>
