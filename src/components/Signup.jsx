@@ -9,6 +9,7 @@ import {
 } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -42,14 +43,30 @@ export default function Signup() {
       console.error(err);
     }
   }
+
   return (
     <>
       {/* main container */}
-      <div className="bg-rose-50 flex items-center justify-center min-h-screen">
+      <motion.div
+        className="bg-rose-50 flex items-center justify-center min-h-screen"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
         {/* card container */}
-        <div className="bg-white flex flex-col relative space-y-10 shadow-2xl rounded-2xl m-6 md:pl-15 md:flex-row md:space-x-6">
+        <motion.div
+          className="bg-white flex flex-col relative space-y-10 shadow-2xl rounded-2xl m-6 md:pl-15 md:flex-row md:space-x-6"
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
           {/* left part container */}
-          <div className="flex flex-col space-y-5 md:pt-15">
+          <motion.div
+            className="flex flex-col space-y-5 md:pt-15"
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <div className="space-y-3">
               <h1 className="text-3xl font-black px-6 font-sans tracking-wide mt-4">
                 Sign Up
@@ -97,7 +114,12 @@ export default function Signup() {
               <p className="font-thin">or sign in with</p>
             </div>
             {/* Social media method */}
-            <div className="flex flex-col md:flex-row px-6 space-y-6 mb-10 md:space-y-0  md:justify-around">
+            <motion.div
+              className="flex flex-col md:flex-row px-6 space-y-6 mb-10 md:space-y-0  md:justify-around"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
               <button className="flex justify-center items-center space-x-4 border-2 border-gray-300 py-2 hover:shadow-2xl duration-150 ease-in-out md:px-8">
                 <img
                   src={"/facebook.png"}
@@ -113,7 +135,7 @@ export default function Signup() {
                 <img src={"/google.png"} alt="google-icon" className="w-10" />
                 <p>Google</p>
               </button>
-            </div>
+            </motion.div>
             <div className="flex justify-center items-center">
               <button className="bg-blue-300 rounded-2xl p-4 hover:bg-blue-800 duration-75 ease-in">
                 <Link to="/login" replace={true}>
@@ -121,12 +143,17 @@ export default function Signup() {
                 </Link>
               </button>
             </div>
-          </div>
-          <div className=" hidden md:block ">
+          </motion.div>
+          <motion.div
+            className=" hidden md:block "
+            initial={{ x: 100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.7 }}
+          >
             <img src={"/water.jpg"} alt="" className="h-170" />
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
     </>
   );
 }

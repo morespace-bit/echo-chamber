@@ -47,7 +47,7 @@ export default function Who() {
         >
           <img src="/thewhy.jpg" alt="" className="w-200" />
         </motion.div>
-        <p className="absolute text-2xl text-blue-500 font-mono bg-violet-300 rounded-xl right-40 bottom-40">
+        <p className="absolute text-2xl text-blue-500 font-mono bg-violet-300 rounded-xl right-40 bottom-40 hidden md:block">
           Enjoying non-toxic platform
         </p>
       </div>

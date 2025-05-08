@@ -5,6 +5,7 @@ import Feed from "./components/Social/Feed";
 import HomeNav from "./components/Home/HomeNav";
 import Hero from "./components/Home/Hero";
 import Who from "./components/Home/Who";
+import WhyJoin from "./components/Home/WhyJoin";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <HomeNav />
       <Hero />
       <Who />
+      <WhyJoin />
     </>
   );
 }
