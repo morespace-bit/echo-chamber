@@ -4,14 +4,14 @@ import SNavBar from "./components/Social/SNavBar";
 import Feed from "./components/Social/Feed";
 import HomeNav from "./components/Home/HomeNav";
 import Hero from "./components/Home/Hero";
-import WhyJoin from "./components/Home/WhyJoin";
+import Who from "./components/Home/Who";
 
 function App() {
   return (
     <>
       <HomeNav />
       <Hero />
-      <WhyJoin />
+      <Who />
     </>
   );
 }
