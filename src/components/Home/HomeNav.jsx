@@ -6,7 +6,7 @@ function HomeNav() {
   return (
     <>
       {/* main container */}
-      <div className="flex items-center justify-between p-3 bg-blue-800 md:px-10 cursor-pointer shadow-2xl shadow-blue-800">
+      <div className="flex items-center justify-between p-3 bg-blue-800 md:px-10 cursor-pointer shadow-2xl shadow-blue-800 sticky top-0 z-10">
         {/* for logo */}
         <div className="flex gap-2 items-center">
           <img src="/Main-logo.png" alt="" className="w-10 md:w-15" />

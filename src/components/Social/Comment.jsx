@@ -19,7 +19,7 @@ export default function Comment({ userData, postId, open, close }) {
   const getComment = async () => {
     const pcommentRef = collection(db, "Post", postId, "comment");
     const q = query(pcommentRef, orderBy("Timestamp", "desc"));
-    const res = await getDocs(pcommentRef);
+    const res = await getDocs(q);
     const data = res.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
