@@ -67,8 +67,8 @@ export default function Login() {
                 Log In
               </h1>
               <p className="font-thin px-6 text-gray-600">
-                Log in to your accoutn to upload or download pictures,videos or
-                music
+                Log in to Exprience the world of non-toxic world. We beieve this
+                will be a journey.
               </p>
             </div>
             {/* Input type or email */}
