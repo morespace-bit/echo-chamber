@@ -1,21 +1,17 @@
 export default function Footer() {
   // class contaier
   return (
-    <div className="mt-80 h-200 pt-30">
-      <div className="flex bg-blue-500 h-200 flex-col pt-10 px-5">
-        {/* logo and the echo chamber name */}
-        <div className="flex flex-row items-center">
-          <img src="/Main-logo.png" alt="" className="w-15" />
-          <p className="text-3xl font-semibold text-white">Echo-Chamber.</p>
+    <div className="mt-105 h-100 bg-blue-300 flex rounded-t-2xl">
+      {/* the noise image */}
+      <div className="py-5 px-2 overflow-hidden w-full  relative">
+        <div className="w-100 h-80 overflow-hidden rounded-2xl">
+          <img src="/noisebg.jpg" alt="" className=" object-cover" />
         </div>
-
-        {/* the text part */}
-
-        <div className="text-left px-2">
-          <p className="text-xl mt-3 text-black">
-            A peaceful place for real conversations and shared interests.
-          </p>
-        </div>
+        <p className="absolute z-10 text-2xl left-8 bottom-30 w-85 font-extrabold font-serif">
+          Help us build a better online space. Your support empowers real
+          conversations, meaningful connections, and a more peaceful digital
+          future—one interaction at a time.
+        </p>
       </div>
     </div>
   );
